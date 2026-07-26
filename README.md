@@ -1,292 +1,164 @@
-# OmniCMS - Multi-Purpose Content Management System
+# OmniCMS - سیستم مدیریت محتوای چند منظوره
 
-## معرفی سیستم (Introduction)
+## معرفی
+OmniCMS یک سیستم مدیریت محتوای ماژولار و انعطاف‌پذیر است که با PHP خام توسعه یافته و قابلیت تبدیل به پلتفرم‌های مختلف از جمله فروشگاهی، وبلاگ، فروم و سازمانی را دارد.
 
-OmniCMS یک سیستم مدیریت محتوای چند منظوره و سازمانی است که با استفاده از PHP خام و با حداقل وابستگی توسعه یافته است. این سیستم قابلیت تبدیل به پلتفرم‌های مختلف از جمله فروشگاهی، وبلاگ، فروم و سایر کاربردهای سازمانی را دارد.
+## ویژگی‌ها
 
-OmniCMS is a multi-purpose organizational content management system developed using raw PHP with minimal dependencies. This system can be transformed into various platforms including e-commerce, blog, forum, and other enterprise applications.
+### هسته مرکزی
+- ✅ معماری MVC/HMVC
+- ✅ Event-Driven Architecture
+- ✅ RESTful API Support
+- ✅ Dependency Injection Container
+- ✅ ORM اختصاصی
+- ✅ سیستم Migration
+- ✅ Multi-language (fa, en, ar, tr, fr)
 
-## ویژگی‌های اصلی (Key Features)
+### امنیت
+- ✅ CSRF Protection
+- ✅ XSS Prevention
+- ✅ SQL Injection Protection (PDO)
+- ✅ .htaccess Security Rules
+- ✅ Password Hashing (bcrypt)
 
-### معماری‌های پیاده‌سازی شده (Implemented Architectures)
-- **MVC** - Model-View-Controller برای سازماندهی کد
-- **HMVC** - Hierarchical MVC برای ماژول‌های مستقل
-- **Event Driven** - معماری مبتنی بر رویداد
-- **Dependency Injection** - تزریق وابستگی پیشرفته
-- **RESTful API** - API استاندارد
+### ماژول‌ها
+- 📝 Blog Module - سیستم وبلاگ‌دهی
+- 🛒 Shop Module - فروشگاه اینترنتی
+- 💬 Forum Module - سیستم انجمن
 
-### موتورها (Engines)
-1. موتور مسیریابی (Routing Engine)
-2. موتور تزریق وابستگی (Dependency Injection Container)
-3. موتور ORM و پایگاه داده (Database/ORM Engine)
-4. موتور قالب‌سازی (Templating Engine)
-5. موتور احراز هویت (Authentication Engine)
-6. موتور میدل‌ور (Middleware Engine)
-7. موتور کش (Caching Engine)
-8. موتور اعتبارسنجی (Validation Engine)
-9. موتور لاگ‌گیری (Logging Engine)
-10. موتور مدیریت خطا (Error Handling Engine)
-11. موتور بین‌المللی‌سازی (Internationalization Engine)
-12. موتور امنیت (Security Engine)
+### پنل مدیریت
+- 📊 Dashboard با نمودارهای Chart.js
+- 👥 مدیریت کاربران
+- 📦 مدیریت ماژول‌ها و افزونه‌ها
+- ⚙️ تنظیمات سیستم
+- 📈 آمار و گزارشات
 
-### ماژول‌های پیش‌فرض (Default Modules)
-- **Blog** - سیستم وبلاگ‌دهی با قابلیت زمانبندی
-- **Forum** - سیستم انجمن و گفتگو
-- **Shop** - سیستم فروشگاه اینترنتی
-
-### زبان‌های پشتیبانی شده (Supported Languages)
-- فارسی (Persian/Farsi) - زبان پایه
-- انگلیسی (English)
-- عربی (Arabic)
-- ترکی (Turkish)
-- فرانسوی (French)
-
-## ساختار پوشه‌ها (Directory Structure)
+## ساختار پروژه
 
 ```
 /workspace
-├── app/                          # هسته اصلی برنامه
-│   ├── Config/                   # فایل‌های پیکربندی
-│   │   ├── config.php           # تنظیمات اصلی
-│   │   └── routes.php           # مسیرهای اصلی
-│   ├── Controllers/              # کنترلرهای اصلی
-│   │   ├── Controller.php       # کنترلر پایه
-│   │   ├── Admin/               # کنترلرهای پنل مدیریت
-│   │   └── Api/                 # کنترلرهای API
-│   ├── Core/                     # هسته مرکزی
-│   │   ├── Autoloader.php       # بارگذار خودکار
-│   │   ├── DependencyInjection/  # کانتینر DI
-│   │   ├── Database/            # اتصال به پایگاه داده
-│   │   ├── Event/               # سیستم رویدادها
-│   │   ├── Http/                # درخواست و پاسخ HTTP
-│   │   └── Log/                 # سیستم لاگ‌گیری
-│   ├── Functions/               # توابع کمکی
-│   │   └── helpers.php          # توابع عمومی
-│   ├── Http/                    # middleware های HTTP
-│   │   └── Middleware/          # میدل ورها
-│   └── Lang/                    # فایل‌های ترجمه
-│       ├── fa/                  # فارسی
-│       ├── en/                  # انگلیسی
-│       ├── ar/                  # عربی
-│       ├── tr/                  # ترکی
-│       └── fr/                  # فرانسوی
-├── Modules/                      # ماژول‌ها
-│   ├── Blog/                    # ماژول وبلاگ
-│   ├── Forum/                   # ماژول فروم
-│   └── Shop/                    # ماژول فروشگاه
-│       ├── Config/              # تنظیمات ماژول
-│       ├── Controllers/         # کنترلرهای ماژول
-│       ├── Models/              # مدل‌های ماژول
-│       ├── Views/               # نمایش‌های ماژول
-│       ├── Assets/              # فایل‌های استاتیک
-│       ├── Migrations/          # مهاجرت‌های پایگاه داده
-│       └── Plugins/             # افزونه‌های ماژول
-├── Plugins/                      # افزونه‌های سراسری
-├── public/                       # دسترسی عمومی
-│   ├── index.php                # نقطه ورود اصلی
-│   ├── .htaccess                # تنظیمات Apache
-│   ├── assets/                  # فایل‌های استاتیک
-│   │   ├── css/                 # استایل‌ها
-│   │   ├── js/                  # اسکریپت‌ها
-│   │   └── images/              # تصاویر
-│   └── uploads/                 # فایل‌های آپلود شده
-├── Storage/                      # ذخیره‌سازی داخلی
-│   ├── cache/                   # کش
-│   ├── logs/                    # گزارش‌ها
-│   └── views/                   # ویو‌های کامپایل شده
-└── Track Changes/                # ردیابی تغییرات
+├── app/                    # کدهای اصلی برنامه
+│   ├── Config/            # فایل‌های پیکربندی
+│   ├── Controllers/       # کنترلرها
+│   │   ├── Admin/        # کنترلرهای ادمین
+│   │   └── Api/          # کنترلرهای API
+│   ├── Core/             # هسته مرکزی
+│   │   ├── Cache/        # موتور کش
+│   │   ├── Database/     # لایه پایگاه داده
+│   │   ├── Event/        # سیستم رویدادها
+│   │   ├── Http/         # درخواست و پاسخ
+│   │   ├── Log/          # لاگ‌گیری
+│   │   └── Security/     # امنیت
+│   ├── Functions/        # توابع کمکی
+│   ├── Lang/            # فایل‌های زبانی
+│   └── Views/           # قالب‌ها
+├── Modules/              # ماژول‌ها
+│   ├── Blog/            # ماژول وبلاگ
+│   ├── Shop/            # ماژول فروشگاه
+│   └── Forum/           # ماژول فروم
+├── Plugins/             # افزونه‌ها
+├── public/              # فایل‌های عمومی
+│   ├── assets/         # CSS, JS, Images
+│   └── uploads/        # فایل‌های آپلود شده
+├── storage/            # فایل‌های ذخیره‌سازی
+│   ├── cache/         # کش
+│   ├── logs/          # لاگ‌ها
+│   └── views/         # قالب‌های کامپایل شده
+└── Track Changes/      # ثبت تغییرات
 ```
 
-## نصب و راه‌اندازی (Installation)
+## نصب و راه‌اندازی
 
-### پیش‌نیازها (Requirements)
+### پیش‌نیازها
 - PHP 7.4 یا بالاتر
-- MySQL 5.7 یا بالاتر / MariaDB 10.3 یا بالاتر
-- Apache با mod_rewrite فعال یا Nginx
-- حداقل 128MB حافظه RAM
+- MySQL 5.7 یا بالاتر / MariaDB
+- Apache با mod_rewrite فعال
+- Composer (اختیاری)
 
-### مراحل نصب (Installation Steps)
+### مراحل نصب
 
-1. **تنظیم پایگاه داده (Database Setup)**
-```sql
-CREATE DATABASE omnicms CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
-
-2. **تنظیم فایل پیکربندی (Configuration)**
-   - فایل `app/Config/config.php` را ویرایش کنید
-   - اطلاعات پایگاه داده را وارد کنید
-
-3. **تنظیم مجوزهای دسترسی (Permissions)**
+1. **کپی فایل‌ها**
 ```bash
-chmod -R 755 /workspace
-chmod -R 777 /workspace/Storage
-chmod -R 777 /workspace/public/uploads
+cp -r /workspace /var/www/html/omnicms
 ```
 
-4. **اجرای Migrationها (Run Migrations)**
+2. **تنظیم مجوزها**
 ```bash
-# از طریق CLI (در حال توسعه)
-php cli.php migrate
+chmod -R 755 /var/www/html/omnicms
+chmod -R 777 /var/www/html/omnicms/storage
+chmod -R 777 /var/www/html/omnicms/public/uploads
 ```
 
-5. **دسترسی به برنامه (Access Application)**
-```
-http://localhost/public/
-```
-
-## کاربران پیش‌فرض (Default Users)
-
-پس از نصب اولیه، می‌توانید اولین کاربر مدیر را از طریق صفحه ثبت‌نام ایجاد کنید.
-
-## امنیت (Security)
-
-### ویژگی‌های امنیتی
-- محافظت در برابر CSRF
-- محافظت در برابر XSS
-- محافظت در برابر SQL Injection (با استفاده از PDO Prepared Statements)
-- هش کردن رمز عبور با الگوریتم bcrypt
-- سیستم احراز هویت چند لایه
-- محدودیت دسترسی بر اساس نقش‌ها
-
-### فایل .htaccess
-فایل `.htaccess` در پوشه `public` تنظیمات امنیتی زیر را اعمال می‌کند:
-- جلوگیری از Directory Listing
-- مسدود کردن دسترسی به فایل‌های حساس
-- هدرهای امنیتی
-- فشرده‌سازی GZIP
-- کش مرورگر
-
-## توسعه ماژول (Module Development)
-
-### ساختار ماژول جدید (New Module Structure)
-
-```
-Modules/YourModule/
-├── __init__                 # فایل شناسایی ماژول
-├── readme.txt              # توضیحات ماژول
-├── Config/
-│   ├── config.php         # تنظیمات ماژول
-│   └── routes.php         # مسیرهای ماژول
-├── Controllers/
-│   └── YourController.php
-├── Models/
-│   └── YourModel.php
-├── Views/
-│   └── your-view.php
-├── Assets/
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── Migrations/
-│   └── create_your_table.php
-└── Plugins/
-    └── YourPlugin/
-```
-
-### فایل `__init__` نمونه (Sample __init__ file)
+3. **پیکربندی پایگاه داده**
+فایل `app/Config/config.php` را ویرایش کنید:
 ```php
-<?php
-return [
-    'name' => 'YourModule',
-    'version' => '1.0.0',
-    'description' => 'Description of your module',
-    'author' => 'Your Name',
-    'dependencies' => [],
-    'active' => true
-];
+'database' => [
+    'host' => 'localhost',
+    'name' => 'omnicms_db',
+    'user' => 'root',
+    'pass' => 'password',
+    'charset' => 'utf8mb4'
+]
 ```
 
-## توسعه افزونه (Plugin Development)
-
-افزونه‌ها برای تکمیل عملکرد ماژول‌ها استفاده می‌شوند و نیاز به رعایت پیش‌نیازها دارند.
-
-## API Documentation
-
-### Endpointهای اصلی (Main Endpoints)
-
-```
-GET  /api/v1/status          # وضعیت سیستم
-GET  /api/v1/posts           # لیست مطالب
-GET  /api/v1/posts/{id}      # جزئیات مطلب
-GET  /api/v1/pages/{slug}    # جزئیات برگه
-GET  /api/v1/categories      # لیست دسته‌بندی‌ها
+4. **اجرای Migration**
+```bash
+php cli migrate
 ```
 
-### احراز هویت API (API Authentication)
-برای دسترسی به endpointهای محافظت شده، از Bearer Token استفاده کنید:
+5. **تنظیم Document Root**
+Document Root وب‌سرور را روی `/public` تنظیم کنید.
+
+## استفاده
+
+### ورود به پنل مدیریت
+- آدرس: `/admin/dashboard`
+- نام کاربری پیش‌فرض: admin
+- رمز عبور پیش‌فرض: admin123
+
+### فعال/غیرفعال کردن ماژول‌ها
+از طریق پنل مدیریت > ماژول‌ها
+
+## مستندات API
+
+### احراز هویت
 ```
-Authorization: Bearer {token}
-```
-
-## سیستم رویدادها (Event System)
-
-### رویدادهای موجود (Available Events)
-- `user.login` - ورود کاربر
-- `user.logout` - خروج کاربر
-- `user.register` - ثبت نام کاربر
-- `post.created` - ایجاد مطلب جدید
-- `post.updated` - بروزرسانی مطلب
-- `post.deleted` - حذف مطلب
-
-### مثال استفاده (Usage Example)
-```php
-// Subscribe to event
-$dispatcher->listen('post.created', function($data) {
-    // Handle event
-    log_message('info', 'New post created: ' . $data['title']);
-});
-
-// Dispatch event
-fire_event('post.created', ['title' => 'My Post', 'id' => 1]);
+POST /api/auth/login
+POST /api/auth/register
+POST /api/auth/logout
 ```
 
-## سیستم ترجمه (Translation System)
-
-### استفاده از توابع ترجمه (Using Translation Functions)
-```php
-// در PHP
-echo __('home'); // خروجی: خانه (fa) یا Home (en)
-
-// تغییر زبان
-$_SESSION['lang'] = 'en';
-echo __('home'); // Output: Home
+### کاربران
+```
+GET    /api/users
+POST   /api/users
+GET    /api/users/{id}
+PUT    /api/users/{id}
+DELETE /api/users/{id}
 ```
 
-## عیب‌یابی (Troubleshooting)
+### مطالب
+```
+GET    /api/posts
+POST   /api/posts
+GET    /api/posts/{id}
+PUT    /api/posts/{id}
+DELETE /api/posts/{id}
+```
 
-### مشکلات رایج (Common Issues)
+## توسعه ماژول جدید
 
-1. **خطای 404 در تمام صفحات**
-   - بررسی فعال بودن mod_rewrite در Apache
-   - بررسی فایل .htaccess
-   - بررسی مسیر RewriteBase
+1. ایجاد پوشه در `Modules/ModuleName`
+2. ایجاد فایل `__init__.php`
+3. ایجاد کنترلرها، مدل‌ها و ویوها
+4. تعریف routes در `Config/routes.php`
 
-2. **خطای اتصال به پایگاه داده**
-   - بررسی اطلاعات اتصال در config.php
-   - بررسی وجود پایگاه داده
-   - بررسی دسترسی کاربر MySQL
+## مجوزها
+- MIT License
 
-3. **خطای Permission Denied**
-   - بررسی مجوزهای پوشه Storage
-   - بررسی مالکیت فایل‌ها
-
-## لاگ‌ها (Logs)
-
-فایل‌های لاگ در پوشه `Storage/logs` قرار دارند:
-- `app.log` - لاگ‌های عمومی برنامه
-- `error.log` - خطاهای PHP
-- `security.log` - رویدادهای امنیتی
-
-## لایسنس (License)
-
-این پروژه تحت لایسنس اختصاصی توسعه یافته است.
-
-## پشتیبانی (Support)
-
-برای گزارش مشکلات و درخواست امکانات جدید، لطفاً از طریق سیستم تیکت اقدام نمایید.
+## پشتیبانی
+برای گزارش مشکلات و درخواست امکانات جدید از بخش Issues استفاده کنید.
 
 ---
-
-**نسخه (Version):** 1.0.0  
-**تاریخ به‌روزرسانی (Last Updated):** 2024  
-**توسعه‌دهنده (Developer):** OmniCMS Team
+نسخه: 1.0.0
+توسعه‌دهنده: OmniCMS Team

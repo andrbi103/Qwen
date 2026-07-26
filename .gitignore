@@ -14,18 +14,15 @@ __pycache__/
 # Dependencies
 vendor/
 node_modules/
-composer.lock
+.env
+.env.local
+.env.*
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
 *.swo
-
-# Environment
-.env
-.env.local
-.env.*
 
 # Editors
 .vscode/
