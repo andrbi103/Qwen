@@ -4,6 +4,8 @@
 __pycache__/
 *.o
 *.obj
+dist/
+build/
 *.class
 *.exe
 *.dll
@@ -12,11 +14,11 @@ __pycache__/
 *.out
 
 # Dependencies
-vendor/
 node_modules/
-.env
-.env.local
-.env.*
+vendor/
+composer.lock
+*.lock
+.cache/
 
 # Logs and temp files
 *.log
@@ -24,21 +26,38 @@ node_modules/
 *.swp
 *.swo
 
+# Environment
+.env
+.env.local
+.env.*
+.env.local.*
+
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
 
-# OS generated files
+# OS specific
 .DS_Store
 Thumbs.db
 
-# Coverage reports
+# Coverage
 coverage/
 htmlcov/
 .coverage
 
+# Python specific
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# PHP specific
+*.phar
+vendor/
+
 # Build directories
-dist/
-build/
 target/
+.gradle/
 ```
