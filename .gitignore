@@ -1,0 +1,72 @@
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# Dependencies
+vendor/
+node_modules/
+*.egg-info/
+.eggs/
+build/
+dist/
+.sass-cache/
+.npm/
+.bower/
+.jspm/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+*.cache
+
+# Environment
+.env
+.env.local
+.env.*
+.env.local.*
+
+# Editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+nbproject/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Testing
+.coverage
+htmlcov/
+.coverage.*
+.tox/
+.pytest_cache/
+.mypy_cache/
+
+# PHP specific
+*.php~
+*.php.bak
+composer.lock
+vendor/
+
+# Web server
+.htaccess
+```
