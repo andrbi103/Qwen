@@ -1,21 +1,135 @@
-# Track Changes Log - OmniCMS
-# =========================================
-# This directory tracks all changes made to the project
-# Format: YYYY-MM-DD_HH-MM-SS_change_type_description.txt
+# Track Changes - سیستم ثبت تغییرات OmniCMS
 
-## Change Types:
-- ADD: New file or feature added
-- UPDATE: Existing file modified
-- DELETE: File removed
-- MOVE: File moved/renamed
-- FIX: Bug fix applied
+## معرفی
+این پوشه شامل تاریخچه کامل تمام تغییرات اعمال شده در پروژه OmniCMS است. هر تغییر با فرمت مشخص و شامل اطلاعات نسخه، تاریخ، نوع تغییر و توضیحات کامل ثبت می‌شود.
 
-## Version History:
-v1.0.0 - Initial Setup (2024-01-01)
-- Core system architecture established
-- MVC/HMVC structure implemented
-- Database layer with PDO created
-- Event-driven architecture foundation
-- Multi-language support (fa, en, ar, tr, fr)
-- Security layer (.htaccess, CSRF, XSS protection)
-- Module system (Blog, Shop, Forum) initialized
+## ساختار فایل‌ها
+نام‌گذاری فایل‌ها به صورت زیر است:
+```
+YYYY-MM-DD_HH-MM-SS_TYPE_description.txt
+```
+
+### اجزای نام فایل:
+- `YYYY-MM-DD`: تاریخ ایجاد تغییر
+- `HH-MM-SS`: زمان ایجاد تغییر
+- `TYPE`: نوع تغییر (ADD, UPDATE, DELETE, FIX, IMPROVE, MIGRATE)
+- `description`: توضیح کوتاه تغییر
+
+## انواع تغییرات
+
+| کد | توضیحات | مثال |
+|-----|---------|------|
+| ADD | افزودن فایل یا قابلیت جدید | ADD_initial_project_structure |
+| UPDATE | بروزرسانی فایل موجود | UPDATE_router_configuration |
+| DELETE | حذف فایل یا قابلیت | DELETE_deprecated_files |
+| FIX | رفع خطا یا باگ | Fix_csrf_validation |
+| IMPROVE | بهبود عملکرد | IMPROVE_cache_performance |
+| MIGRATE | تغییرات پایگاه داده | MIGRATE_create_users_table |
+| DOC | مستندات | DOC_update_readme |
+
+## ساختار محتوای فایل
+
+هر فایل تغییر شامل بخش‌های زیر است:
+
+```markdown
+# عنوان تغییر
+
+## اطلاعات
+- **نسخه:** 1.0.0
+- **تاریخ:** 1403/01/01 - 2024-01-01
+- **زمان:** 12:00:00
+- **نوع:** ADD/UPDATE/DELETE/FIX/IMPROVE/MIGRATE
+- **توسعه‌دهنده:** نام توسعه‌دهنده
+
+## فایل‌های تغییر یافته
+- مسیر/فایل1.php - نسخه قبلی -> نسخه جدید
+- مسیر/فایل2.php - نسخه قبلی -> نسخه جدید
+
+## توضیحات تغییرات
+توضیح کامل تغییرات اعمال شده
+
+## دلیل تغییر
+علت ایجاد این تغییر
+
+## تاثیر بر سیستم
+تغییرات ایجاد شده در عملکرد سیستم
+
+## Rollback
+دستورات یا مراحل بازگشت به نسخه قبل (در صورت نیاز)
+
+## تست‌های انجام شده
+- [ ] تست واحد
+- [ ] تست یکپارچگی
+- [ ] تست عملکرد
+
+## یادداشت‌ها
+یادداشت‌های اضافی برای توسعه‌دهندگان
+```
+
+## نحوه استفاده از Track Changes
+
+### مشاهده تاریخچه
+```bash
+# مشاهده آخرین تغییرات
+ls -lt "Track Changes/" | head -10
+
+# جستجو در تغییرات
+grep -r "کلمه کلیدی" "Track Changes/"
+
+# مشاهده تغییرات یک روز خاص
+ls "Track Changes/" | grep "2024-01-01"
+```
+
+### بازگشت به نسخه قبل (Rollback)
+1. فایل تغییر مورد نظر را پیدا کنید
+2. دستورالعمل‌های بخش Rollback را دنبال کنید
+3. فایل‌های بک‌آپ را بازیابی کنید
+
+### ایجاد تغییر جدید
+1. فایل جدید با نام استاندارد ایجاد کنید
+2. اطلاعات کامل را در فایل وارد کنید
+3. نسخه اصلی و جدید فایل‌ها را مشخص کنید
+4. فایل را در پوشه Track Changes ذخیره کنید
+
+## پایگاه داده Track Changes
+
+جدول `track_changes` در پایگاه داده تغییرات را ثبت می‌کند:
+
+```sql
+CREATE TABLE track_changes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    version VARCHAR(20),
+    change_date DATETIME,
+    change_type VARCHAR(50),
+    description TEXT,
+    files_changed JSON,
+    developer VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+## نسخه‌بندی
+
+سیستم نسخه‌بندی Semantic Versioning را دنبال می‌کند:
+- **MAJOR.MINOR.PATCH** (مثال: 1.0.0)
+- MAJOR: تغییرات اساسی و ناسازگار
+- MINOR: افزودن قابلیت‌های جدید سازگار
+- PATCH: رفع خطا و بهبودهای کوچک
+
+## لاگ تغییرات مهم
+
+### نسخه 1.0.0 (اولین انتشار)
+- ✅ ایجاد هسته مرکزی
+- ✅ پیاده‌سازی معماری HMVC
+- ✅ سیستم Event-Driven
+- ✅ ماژول وبلاگ
+- ✅ ماژول فروشگاه
+- ✅ ماژول فروم
+- ✅ پنل مدیریت
+- ✅ چندزبانه (5 زبان)
+- ✅ امنیت کامل
+
+---
+
+**توسعه‌دهنده:** OmniCMS Team  
+**آخرین بروزرسانی:** 2024
