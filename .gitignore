@@ -2,15 +2,25 @@
 # Compiled and build artifacts
 *.pyc
 __pycache__/
+*.o
+*.obj
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
 
 # Dependencies
 vendor/
 node_modules/
+composer.lock
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
+*.swo
 
 # Environment
 .env
@@ -21,8 +31,29 @@ node_modules/
 .vscode/
 .idea/
 
-# Laravel/PHP specific
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Build and distribution
+dist/
+build/
+target/
+*.tar.gz
+*.zip
+*.jar
+*.war
+
+# PHP specific
+*.php~
+.htaccess
+
+# Laravel/PHP frameworks
 storage/
 bootstrap/cache/
-public/storage
 ```

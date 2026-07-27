@@ -11,25 +11,26 @@ if (!$router) {
     return; // Exit if router is not available
 }
 
+// Admin routes with prefix and middleware
 $router->group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function($router) {
     // Dashboard
-    $router->get('/dashboard', 'Modules\Core\Controllers\Admin\DashboardController@index');
+    $router->get('/dashboard', 'Modules\Core\Controllers\Admin\DashboardController@index')->name('admin.dashboard');
     
     // Modules Management
-    $router->get('/modules', 'Modules\Core\Controllers\Admin\ModulesController@index');
-    $router->get('/modules/activate/{name}', 'Modules\Core\Controllers\Admin\ModulesController@activate');
-    $router->get('/modules/deactivate/{name}', 'Modules\Core\Controllers\Admin\ModulesController@deactivate');
+    $router->get('/modules', 'Modules\Core\Controllers\Admin\ModulesController@index')->name('admin.modules');
+    $router->get('/modules/activate/{name}', 'Modules\Core\Controllers\Admin\ModulesController@activate')->name('admin.modules.activate');
+    $router->get('/modules/deactivate/{name}', 'Modules\Core\Controllers\Admin\ModulesController@deactivate')->name('admin.modules.deactivate');
     
     // Settings
-    $router->get('/settings', 'Modules\Core\Controllers\Admin\SettingsController@index');
-    $router->post('/settings/update', 'Modules\Core\Controllers\Admin\SettingsController@update');
+    $router->get('/settings', 'Modules\Core\Controllers\Admin\SettingsController@index')->name('admin.settings');
+    $router->post('/settings/update', 'Modules\Core\Controllers\Admin\SettingsController@update')->name('admin.settings.update');
     
-    // Profile
-    $router->get('/profile', 'Modules\Core\Controllers\Admin\ProfileController@index');
-    $router->post('/profile/update', 'Modules\Core\Controllers\Admin\ProfileController@update');
+    // Profile (admin specific)
+    $router->get('/profile', 'Modules\Core\Controllers\Admin\ProfileController@index')->name('admin.profile');
+    $router->post('/profile/update', 'Modules\Core\Controllers\Admin\ProfileController@update')->name('admin.profile.update');
 });
 
 // Redirect admin root to dashboard
 $router->get('/admin', function() {
     return redirect('/admin/dashboard');
-});
+})->name('admin');
