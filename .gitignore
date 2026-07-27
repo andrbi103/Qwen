@@ -1,1 +1,28 @@
-Nothing needs to be added to .gitignore based on the provided file changes, as they only include PHP source files (.php) and no build artifacts, dependencies, or temporary files that should be ignored.
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+
+# Dependencies
+vendor/
+node_modules/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
+.env
+.env.local
+*.env.*
+
+# Editors
+.vscode/
+.idea/
+
+# Laravel/PHP specific
+storage/
+bootstrap/cache/
+public/storage
+```
