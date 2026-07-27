@@ -1,0 +1,9 @@
+[2026-07-27 08:04:26] INFO.:: Home page accessed
+[2026-07-27 08:05:45] INFO.:: Home page accessed
+[2026-07-27 08:05:45] ERROR.helpers.php:345: View not found: front.home.index
+[2026-07-27 08:05:45] ERROR.index.php:71: Route handler error: View 'front.home.index' not found
+[2026-07-27 08:20:28] INFO.unknown: Home page accessed
+[2026-07-27 08:20:28] ERROR.helpers.php:346: View not found: front.home.index
+[2026-07-27 08:20:28] ERROR.index.php:71: Route handler error: View 'front.home.index' not found
+[2026-07-27 08:20:58] INFO.unknown: Home page accessed
+[2026-07-27 08:20:58] DEBUG.helpers.php:346: Rendering view: front.home.index {"file":"\/workspace\/Modules\/Core\/Views\/front\/home\/index.php"}
