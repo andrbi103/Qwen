@@ -70,8 +70,8 @@ try {
     
 } catch (\Exception $e) {
     // Handle fatal errors
-    if (class_exists('\\OmniCMS\\Core\\Log\\Logger')) {
-        \\OmniCMS\Core\Log\Logger::emergency('Fatal error: ' . $e->getMessage());
+    if (class_exists('\OmniCMS\Core\Log\Logger')) {
+        \OmniCMS\Core\Log\Logger::emergency('Fatal error: ' . $e->getMessage());
     }
     
     if (isset($config) && $config['debug']) {
