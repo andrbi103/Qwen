@@ -168,20 +168,47 @@ function loadModuleRoutes()
     }
     
     $modules = scandir(MODULES_PATH);
+    
+    // Separate Core module from others
+    $coreModule = null;
+    $otherModules = [];
+    
     foreach ($modules as $module) {
         if ($module === '.' || $module === '..' || !is_dir(MODULES_PATH . DS . $module)) {
             continue;
         }
         
-        // Check for Config/routes.php first, then Routes/web.php
-        $routeFile = MODULES_PATH . DS . $module . DS . 'Config' . DS . 'routes.php';
-        if (!file_exists($routeFile)) {
-            $routeFile = MODULES_PATH . DS . $module . DS . 'Routes' . DS . 'web.php';
+        if ($module === 'Core') {
+            $coreModule = $module;
+        } else {
+            $otherModules[] = $module;
         }
-        
-        if (file_exists($routeFile)) {
-            require_once $routeFile;
-        }
+    }
+    
+    // Load Core module first (if exists)
+    if ($coreModule) {
+        loadModuleRouteFile($coreModule);
+    }
+    
+    // Load other modules
+    foreach ($otherModules as $module) {
+        loadModuleRouteFile($module);
+    }
+}
+
+/**
+ * Load route file for a specific module
+ */
+function loadModuleRouteFile($module)
+{
+    // Check for Config/routes.php first, then Routes/web.php
+    $routeFile = MODULES_PATH . DS . $module . DS . 'Config' . DS . 'routes.php';
+    if (!file_exists($routeFile)) {
+        $routeFile = MODULES_PATH . DS . $module . DS . 'Routes' . DS . 'web.php';
+    }
+    
+    if (file_exists($routeFile)) {
+        require_once $routeFile;
     }
 }
 
