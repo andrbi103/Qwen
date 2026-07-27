@@ -1,31 +1,26 @@
 ```
-# Dependencies
-vendor/
-
-# Build artifacts
-node_modules/
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
 dist/
 build/
 target/
-*.o
-*.obj
-*.out
 
-# Python artifacts
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.so
-*.egg-info/
+# Dependencies
+.venv/
+venv/
+node_modules/
+vendor/
+composer.lock
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
-*.swo
 
-# Environment variables
+# Environment
 .env
 .env.local
 .env.*
@@ -45,17 +40,8 @@ coverage/
 htmlcov/
 .coverage
 
-# PHP specific
-*.php~
-*.bak
-*.orig
-
 # Cache directories
-.cache/
-.cargo/
-.gradle/
 .mypy_cache/
 .pytest_cache/
-.npm/
-.yarn/
+.cache/
 ```
