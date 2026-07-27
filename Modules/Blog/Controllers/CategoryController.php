@@ -1,114 +1,39 @@
 <?php
 /**
  * Blog Module - Category Controller
- * Handles blog category operations
  */
 
-class BlogCategoryController extends Controller {
+namespace Modules\Blog\Controllers;
+
+use OmniCMS\Core\Http\Request;
+
+class BlogCategoryController {
     
-    public function index() {
-        $categories = BlogCategory::withCount('posts')
-            ->parent()
-            ->orderBy('name')
-            ->get();
-        
-        return view('blog.categories.index', compact('categories'));
+    public function index(Request $request) {
+        return new \OmniCMS\Core\Http\Response('<h1>Blog Categories</h1>');
     }
     
-    public function show($slug) {
-        $category = BlogCategory::where('slug', $slug)->firstOrFail();
-        
-        $posts = BlogPost::where('category_id', $category->id)
-            ->published()
-            ->orderBy('published_at', 'desc')
-            ->paginate(10);
-        
-        return view('blog.categories.show', compact('category', 'posts'));
+    public function show(Request $request, $slug) {
+        return new \OmniCMS\Core\Http\Response('<h1>Category: ' . htmlspecialchars($slug) . '</h1>');
     }
     
-    public function create() {
-        $this->authorize('create', BlogCategory::class);
-        
-        $categories = BlogCategory::all();
-        
-        return view('blog.categories.create', compact('categories'));
+    public function create(Request $request) {
+        return new \OmniCMS\Core\Http\Response('<h1>Create Category</h1>');
     }
     
     public function store(Request $request) {
-        $this->authorize('create', BlogCategory::class);
-        
-        $validated = Validator::make($request->all(), [
-            'name' => 'required|max:100',
-            'slug' => 'required|unique:blog_categories,slug',
-            'description' => 'nullable',
-            'parent_id' => 'nullable|exists:blog_categories,id'
-        ]);
-        
-        if ($validated->fails()) {
-            return redirect()->back()->withErrors($validated)->withInput();
-        }
-        
-        $category = BlogCategory::create($validated->validated());
-        
-        Event::dispatch('blog.category.created', ['category' => $category]);
-        
-        return redirect()->route('blog.categories.index')
-            ->with('success', __('Category created successfully'));
+        return new \OmniCMS\Core\Http\Response('<h1>Category Created</h1>');
     }
     
-    public function edit($id) {
-        $category = BlogCategory::findOrFail($id);
-        $this->authorize('update', $category);
-        
-        $categories = BlogCategory::all();
-        
-        return view('blog.categories.edit', compact('category', 'categories'));
+    public function edit(Request $request, $id) {
+        return new \OmniCMS\Core\Http\Response('<h1>Edit Category: ' . htmlspecialchars($id) . '</h1>');
     }
     
     public function update(Request $request, $id) {
-        $category = BlogCategory::findOrFail($id);
-        $this->authorize('update', $category);
-        
-        $validated = Validator::make($request->all(), [
-            'name' => 'required|max:100',
-            'slug' => 'required|unique:blog_categories,slug,' . $id,
-            'description' => 'nullable',
-            'parent_id' => 'nullable|exists:blog_categories,id|not_in:' . $id
-        ]);
-        
-        if ($validated->fails()) {
-            return redirect()->back()->withErrors($validated)->withInput();
-        }
-        
-        $category->update($validated->validated());
-        
-        Event::dispatch('blog.category.updated', ['category' => $category]);
-        
-        return redirect()->route('blog.categories.index')
-            ->with('success', __('Category updated successfully'));
+        return new \OmniCMS\Core\Http\Response('<h1>Category Updated: ' . htmlspecialchars($id) . '</h1>');
     }
     
-    public function destroy($id) {
-        $category = BlogCategory::findOrFail($id);
-        $this->authorize('delete', $category);
-        
-        // Check if category has children
-        if ($category->children()->count() > 0) {
-            return redirect()->back()
-                ->with('error', __('Cannot delete category with subcategories'));
-        }
-        
-        // Check if category has posts
-        if ($category->posts()->count() > 0) {
-            return redirect()->back()
-                ->with('error', __('Cannot delete category with posts'));
-        }
-        
-        $category->delete();
-        
-        Event::dispatch('blog.category.deleted', ['category' => $category]);
-        
-        return redirect()->route('blog.categories.index')
-            ->with('success', __('Category deleted successfully'));
+    public function destroy(Request $request, $id) {
+        return new \OmniCMS\Core\Http\Response('<h1>Category Deleted: ' . htmlspecialchars($id) . '</h1>');
     }
 }

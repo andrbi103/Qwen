@@ -173,7 +173,12 @@ function loadModuleRoutes()
             continue;
         }
         
+        // Check for Config/routes.php first, then Routes/web.php
         $routeFile = MODULES_PATH . DS . $module . DS . 'Config' . DS . 'routes.php';
+        if (!file_exists($routeFile)) {
+            $routeFile = MODULES_PATH . DS . $module . DS . 'Routes' . DS . 'web.php';
+        }
+        
         if (file_exists($routeFile)) {
             require_once $routeFile;
         }

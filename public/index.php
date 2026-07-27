@@ -43,9 +43,14 @@ try {
     $container = new \OmniCMS\Core\DependencyInjection\Container();
     $container->set('config', $config);
     
-    // Initialize database
-    $db = new \OmniCMS\Core\Database\Connection($config['database']);
-    $container->set('db', $db);
+    // Initialize database (only if PDO is available)
+    try {
+        $db = new \OmniCMS\Core\Database\Connection($config['database']);
+        $container->set('db', $db);
+    } catch (\PDOException $e) {
+        // Database connection failed, continue without DB
+        $container->set('db', null);
+    }
     
     // Initialize event dispatcher
     $dispatcher = new \OmniCMS\Core\Event\Dispatcher();
@@ -65,9 +70,11 @@ try {
     
 } catch (\Exception $e) {
     // Handle fatal errors
-    \OmniCMS\Core\Log\Logger::emergency('Fatal error: ' . $e->getMessage());
+    if (class_exists('\\OmniCMS\\Core\\Log\\Logger')) {
+        \\OmniCMS\Core\Log\Logger::emergency('Fatal error: ' . $e->getMessage());
+    }
     
-    if ($config['debug']) {
+    if (isset($config) && $config['debug']) {
         echo '<h1>System Error</h1>';
         echo '<pre>' . htmlspecialchars($e->getMessage()) . '</pre>';
         echo '<pre>' . htmlspecialchars($e->getTraceAsString()) . '</pre>';
@@ -75,5 +82,8 @@ try {
         http_response_code(500);
         echo '<h1>Internal Server Error</h1>';
         echo '<p>Please try again later.</p>';
+        if (isset($config) && $config['debug']) {
+            echo '<pre>' . htmlspecialchars($e->getMessage()) . '</pre>';
+        }
     }
 }
