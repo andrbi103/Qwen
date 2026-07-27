@@ -341,7 +341,7 @@ function db()
  */
 function view($view, array $data = [])
 {
-    $renderer = new \App\Core\Http\ViewRenderer();
+    $renderer = new \OmniCMS\Core\Http\ViewRenderer();
     return $renderer->render($view, $data);
 }
 

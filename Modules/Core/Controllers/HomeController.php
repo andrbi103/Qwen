@@ -6,9 +6,9 @@
 
 namespace Modules\Core\Controllers;
 
-use App\Core\Http\Request;
-use App\Core\Http\Response;
-use App\Core\Logging\Logger;
+use OmniCMS\Core\Http\Request;
+use OmniCMS\Core\Http\Response;
+use OmniCMS\Core\Log\Logger;
 
 class HomeController
 {

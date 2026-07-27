@@ -2,8 +2,9 @@
 
 namespace Modules\Core\Controllers\Admin;
 
-use App\Core\Http\Request;
-use App\Core\Logging\Logger;
+use OmniCMS\Core\Http\Request;
+use OmniCMS\Core\Http\Response;
+use OmniCMS\Core\Log\Logger;
 
 class ModulesController
 {

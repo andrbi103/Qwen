@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Core\Http;
+namespace OmniCMS\Core\Http;
 
-use App\Core\Logging\Logger;
+use OmniCMS\Core\Log\Logger;
 
 class ViewRenderer
 {
