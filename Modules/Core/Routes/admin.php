@@ -1,4 +1,15 @@
 <?php
+/**
+ * Core Module - Admin Routes
+ * Administrative routes for the application
+ */
+
+// Get router from global scope
+$router = $GLOBALS['router'] ?? null;
+
+if (!$router) {
+    return; // Exit if router is not available
+}
 
 $router->group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function($router) {
     // Dashboard
