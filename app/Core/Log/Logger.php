@@ -231,8 +231,10 @@ class Logger
     {
         $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 4);
         
-        if (isset($trace[3])) {
-            return basename($trace[3]['file']) . ':' . $trace[3]['line'];
+        if (isset($trace[3]) && isset($trace[3]['file']) && isset($trace[3]['line'])) {
+            $file = basename($trace[3]['file']);
+            $line = $trace[3]['line'];
+            return $file . ':' . $line;
         }
 
         return 'unknown';

@@ -53,12 +53,51 @@ class ViewRenderer
         // Convert dot notation to path
         $viewPath = str_replace('.', '/', $view) . '.php';
         
+        // Try direct paths first
         foreach ($this->viewPaths as $basePath) {
             $fullPath = $basePath . DS . $viewPath;
             
             if (file_exists($fullPath)) {
                 return $fullPath;
             }
+        }
+        
+        // Try Module structure: Modules/{Module}/Views/{type}/{controller}/{action}.php
+        // Expected format: type.module.controller.action or type.controller.action
+        $parts = explode('.', $view);
+        
+        if (count($parts) >= 3) {
+            // Format: type.module.controller.action (e.g., front.core.home.index)
+            $type = $parts[0];
+            $module = ucfirst($parts[1]);
+            $controller = $parts[2];
+            $action = $parts[3] ?? 'index';
+            
+            $moduleViewPath = MODULES_PATH . DS . $module . DS . 'Views' . DS . $type . DS . $controller . DS . $action . '.php';
+            
+            if (file_exists($moduleViewPath)) {
+                return $moduleViewPath;
+            }
+            
+            // Also try without module in path for Core module views
+            // Format: front.home.index -> Modules/Core/Views/front/home/index.php
+            if (count($parts) == 3) {
+                $type = $parts[0];
+                $controller = $parts[1];
+                $action = $parts[2];
+                
+                $coreViewPath = MODULES_PATH . DS . 'Core' . DS . 'Views' . DS . $type . DS . $controller . DS . $action . '.php';
+                
+                if (file_exists($coreViewPath)) {
+                    return $coreViewPath;
+                }
+            }
+        }
+        
+        // Try app/Views structure
+        $appViewPath = APP_PATH . DS . 'Views' . DS . $viewPath;
+        if (file_exists($appViewPath)) {
+            return $appViewPath;
         }
         
         return false;

@@ -212,6 +212,7 @@ function loadModuleRouteFile($module, $type = 'web')
     if (file_exists($routeFile)) {
         require_once $routeFile;
     }
+    // Silently skip if file doesn't exist (e.g., admin.php for modules without admin routes)
 }
 
 /**
