@@ -3,6 +3,13 @@
  * Blog Module - Routes
  */
 
+// Get router from global scope
+$router = $GLOBALS['router'] ?? null;
+
+if (!$router) {
+    return; // Exit if router is not available
+}
+
 $router->group(['prefix' => 'blog', 'middleware' => ['web']], function($router) {
     
     // Public routes

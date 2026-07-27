@@ -60,6 +60,9 @@ try {
     $router = new \OmniCMS\Core\Http\Router();
     $container->set('router', $router);
     
+    // Make router globally available for route files
+    $GLOBALS['router'] = $router;
+    
     // Load module routes
     loadModuleRoutes();
     
