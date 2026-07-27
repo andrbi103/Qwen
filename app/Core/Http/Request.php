@@ -162,7 +162,7 @@ class Request
     public function wantsJson()
     {
         $accept = $this->getHeader('Accept');
-        return strpos($accept, 'application/json') !== false;
+        return $accept !== null && strpos($accept, 'application/json') !== false;
     }
 
     /**
@@ -173,7 +173,7 @@ class Request
     public function isJson()
     {
         $contentType = $this->getHeader('Content-Type');
-        return strpos($contentType, 'application/json') !== false;
+        return $contentType !== null && strpos($contentType, 'application/json') !== false;
     }
 
     /**
