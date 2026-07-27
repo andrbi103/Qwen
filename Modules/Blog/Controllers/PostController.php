@@ -6,38 +6,68 @@
 
 namespace Modules\Blog\Controllers;
 
-use OmniCMS\Core\Http\Request;
-use OmniCMS\App\Controllers\Controller;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
+use App\Core\Logging\Logger;
 
-class BlogPostController extends Controller {
-    
-    public function index(Request $request) {
-        // Temporary implementation for demo
-        return new \OmniCMS\Core\Http\Response('<h1>Blog Posts</h1><p>Blog module is working!</p>');
+class BlogPostController
+{
+    public function index(Request $request)
+    {
+        Logger::info('Blog posts page accessed');
+        
+        $data = [
+            'title' => 'وبلاگ',
+            'posts' => [
+                ['title' => 'اولین مطلب وبلاگ', 'slug' => 'first-post', 'excerpt' => 'این اولین مطلب وبلاگ است'],
+                ['title' => 'دومین مطلب وبلاگ', 'slug' => 'second-post', 'excerpt' => 'این دومین مطلب وبلاگ است']
+            ]
+        ];
+        
+        return new Response(view('blog.posts.index', $data));
     }
     
-    public function show(Request $request, $slug) {
-        // Temporary implementation for demo
-        return new \OmniCMS\Core\Http\Response('<h1>Blog Post: ' . htmlspecialchars($slug) . '</h1>');
+    public function show(Request $request, $slug)
+    {
+        Logger::info("Blog post viewed: $slug");
+        
+        $data = [
+            'title' => 'مطلب وبلاگ',
+            'post' => [
+                'title' => 'عنوان مطلب',
+                'slug' => $slug,
+                'content' => 'محتوای کامل مطلب وبلاگ در اینجا قرار می‌گیرد.'
+            ]
+        ];
+        
+        return new Response(view('blog.posts.show', $data));
     }
     
-    public function create(Request $request) {
-        return new \OmniCMS\Core\Http\Response('<h1>Create Post</h1>');
+    public function create(Request $request)
+    {
+        return new Response(view('blog.posts.create', ['title' => 'ایجاد مطلب جدید']));
     }
     
-    public function store(Request $request) {
-        return new \OmniCMS\Core\Http\Response('<h1>Post Created</h1>');
+    public function store(Request $request)
+    {
+        Logger::info('New blog post created');
+        return redirect('/blog')->with('success', 'مطلب با موفقیت ایجاد شد');
     }
     
-    public function edit(Request $request, $id) {
-        return new \OmniCMS\Core\Http\Response('<h1>Edit Post: ' . htmlspecialchars($id) . '</h1>');
+    public function edit(Request $request, $id)
+    {
+        return new Response(view('blog.posts.edit', ['title' => 'ویرایش مطلب', 'id' => $id]));
     }
     
-    public function update(Request $request, $id) {
-        return new \OmniCMS\Core\Http\Response('<h1>Post Updated: ' . htmlspecialchars($id) . '</h1>');
+    public function update(Request $request, $id)
+    {
+        Logger::info("Blog post updated: $id");
+        return redirect("/blog/post/$id")->with('success', 'مطلب با موفقیت به‌روزرسانی شد');
     }
     
-    public function destroy(Request $request, $id) {
-        return new \OmniCMS\Core\Http\Response('<h1>Post Deleted: ' . htmlspecialchars($id) . '</h1>');
+    public function destroy(Request $request, $id)
+    {
+        Logger::info("Blog post deleted: $id");
+        return redirect('/blog')->with('success', 'مطلب حذف شد');
     }
 }

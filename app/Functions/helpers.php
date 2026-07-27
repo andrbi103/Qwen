@@ -185,26 +185,28 @@ function loadModuleRoutes()
         }
     }
     
-    // Load Core module first (if exists)
+    // Load Core module first (if exists) - both web and admin routes
     if ($coreModule) {
-        loadModuleRouteFile($coreModule);
+        loadModuleRouteFile($coreModule, 'web');
+        loadModuleRouteFile($coreModule, 'admin');
     }
     
     // Load other modules
     foreach ($otherModules as $module) {
-        loadModuleRouteFile($module);
+        loadModuleRouteFile($module, 'web');
+        loadModuleRouteFile($module, 'admin');
     }
 }
 
 /**
  * Load route file for a specific module
  */
-function loadModuleRouteFile($module)
+function loadModuleRouteFile($module, $type = 'web')
 {
-    // Check for Config/routes.php first, then Routes/web.php
+    // Check for Config/routes.php first, then Routes/{type}.php
     $routeFile = MODULES_PATH . DS . $module . DS . 'Config' . DS . 'routes.php';
     if (!file_exists($routeFile)) {
-        $routeFile = MODULES_PATH . DS . $module . DS . 'Routes' . DS . 'web.php';
+        $routeFile = MODULES_PATH . DS . $module . DS . 'Routes' . DS . $type . '.php';
     }
     
     if (file_exists($routeFile)) {
@@ -337,10 +339,22 @@ function db()
  * @param array $data Data to pass to view
  * @return string Rendered HTML
  */
+function view($view, array $data = [])
+{
+    $renderer = new \App\Core\Http\ViewRenderer();
+    return $renderer->render($view, $data);
+}
+
+/**
+ * Render view (alias for backward compatibility)
+ * 
+ * @param string $view View name
+ * @param array $data Data to pass to view
+ * @return string Rendered HTML
+ */
 function render_view($view, array $data = [])
 {
-    $renderer = new \OmniCMS\Core\Http\ViewRenderer();
-    return $renderer->render($view, $data);
+    return view($view, $data);
 }
 
 /**
