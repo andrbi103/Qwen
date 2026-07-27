@@ -6,8 +6,9 @@
 
 namespace Modules\Core\Controllers;
 
-use OmniCMS\Core\Http\Request;
-use OmniCMS\Core\Http\Response;
+use App\Core\Http\Request;
+use App\Core\Http\Response;
+use App\Core\Logging\Logger;
 
 class HomeController
 {
@@ -16,13 +17,16 @@ class HomeController
      */
     public function index(Request $request)
     {
+        Logger::info('Home page accessed');
+        
         $data = [
             'title' => 'OmniCMS - صفحه اصلی',
             'description' => 'سیستم مدیریت محتوای چندمنظوره',
             'modules' => ['Blog', 'Forum', 'Shop']
         ];
         
-        return new Response($this->renderView('home.index', $data));
+        $content = view('front.home.index', $data);
+        return new Response($content);
     }
     
     /**
@@ -30,12 +34,15 @@ class HomeController
      */
     public function about(Request $request)
     {
+        Logger::info('About page accessed');
+        
         $data = [
             'title' => 'درباره ما',
             'version' => '1.0.0'
         ];
         
-        return new Response($this->renderView('home.about', $data));
+        $content = view('front.home.about', $data);
+        return new Response($content);
     }
     
     /**
@@ -43,13 +50,16 @@ class HomeController
      */
     public function contact(Request $request)
     {
+        Logger::info('Contact page accessed');
+        
         $data = [
             'title' => 'تماس با ما',
             'success' => null,
             'errors' => []
         ];
         
-        return new Response($this->renderView('home.contact', $data));
+        $content = view('front.home.contact', $data);
+        return new Response($content);
     }
     
     /**
@@ -57,6 +67,8 @@ class HomeController
      */
     public function submitContact(Request $request)
     {
+        Logger::info('Contact form submitted');
+        
         // Validate input
         $errors = [];
         
@@ -80,10 +92,12 @@ class HomeController
                 'old' => $request->all()
             ];
             
-            return new Response($this->renderView('home.contact', $data), 422);
+            $content = view('front.home.contact', $data);
+            return new Response($content, 422);
         }
         
         // In a real application, you would send email or save to database here
+        Logger::info('Contact form submitted successfully', $request->all());
         
         $data = [
             'title' => 'تماس با ما',
@@ -91,29 +105,7 @@ class HomeController
             'errors' => []
         ];
         
-        return new Response($this->renderView('home.contact', $data));
-    }
-    
-    /**
-     * Render view helper
-     */
-    private function renderView($view, $data = [])
-    {
-        $viewPath = MODULES_PATH . '/Core/Views/' . str_replace('.', '/', $view) . '.blade.php';
-        
-        if (!file_exists($viewPath)) {
-            // Fallback to app views
-            $viewPath = APP_PATH . '/Views/' . str_replace('.', '/', $view) . '.blade.php';
-        }
-        
-        if (!file_exists($viewPath)) {
-            return '<h1>View not found: ' . e($view) . '</h1>';
-        }
-        
-        extract($data);
-        
-        ob_start();
-        include $viewPath;
-        return ob_get_clean();
+        $content = view('front.home.contact', $data);
+        return new Response($content);
     }
 }
