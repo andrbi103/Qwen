@@ -1,24 +1,31 @@
 <?php
 /**
- * Core Module - System Base Module
- * Provides essential routes and controllers for the application
+ * Core Module Initialization
+ * Main module for the application
  */
 
-namespace Modules\Core;
-
-class CoreModule
-{
-    /**
-     * Module configuration
-     */
-    public static function getConfig()
-    {
-        return [
-            'name' => 'Core',
-            'version' => '1.0.0',
-            'description' => 'System core module providing base functionality',
-            'active' => true,
-            'priority' => 1 // Load first
-        ];
-    }
-}
+return [
+    'name' => 'Core',
+    'version' => '1.0.0',
+    'description' => 'Core system module providing essential functionality',
+    'author' => 'OmniCMS Team',
+    'routes' => [
+        'web' => Routes/web.php,
+        'admin' => Routes/admin.php
+    ],
+    'middleware' => [
+        'auth' => Middleware\AuthMiddleware::class,
+        'admin' => Middleware\AdminMiddleware::class
+    ],
+    'models' => [
+        Models\User::class
+    ],
+    'migrations' => [
+        Migrations\CreateUsersTable::class
+    ],
+    'seeders' => [
+        Seeders\DefaultUsersSeeder::class
+    ],
+    'priority' => 1, // Load first
+    'active' => true
+];
